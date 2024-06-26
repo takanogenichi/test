@@ -41,7 +41,9 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_NO_INTERACTION 1
 
-#RUN cd /var/www/html && composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+# 以下は必要に応じる
+#EXPOSE 8080
+#USER www
 
 CMD sh -c "ls -lat /var/www/html && pwd";sh -c "which composer";sh -c "cd /var/www/html && composer install --no-dev --optimize-autoloader --ignore-platform-reqs";sh -c "cd /var/www/html && php artisan config:cache";sh -c "tail -f /dev/null"
 #CMD sh -c "ls -lat && pwd";sh -c "tail -f /dev/null"
