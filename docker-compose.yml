@@ -1,0 +1,25 @@
+version: '3'
+
+# - networks
+#   - 定義がないとsubnetがランダムで作成されるが、iDCネットワークと同一のネットワーク帯で作成されるとトラブルの元になるので定義しておく。
+#   - ネットワーク名は[フォルダ名 + 'default']になるので、今回は「porc_default」になります。
+#   - 既存のdockerネットワークに接続することもできるが、毎年かなりの数のIPを消費することになるため、年度ごとに開発用ネットワークを定義していく。(現状は第3オクテット=年度)
+# - services
+#   - Docker for Windows/Docker for Macではdocker0(ブリッジ)が作られず直接接続できないため、ポートを公開してアクセスするしかない。
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.41.0/24
+
+services:
+  container1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /var/www/html
+    volumes:
+        - ./:/var/www/html:cached
+        - ${HOME}/.composer:/var/www/.composer
