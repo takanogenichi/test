@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Put apache config for Laravel
-# 以下2行コメントアウトしたが何をしているか不明(もしかしたら、www配下なら動作するかも。)
+# 以下2行コメントアウトしたが何をしているか不明(もしかしたら、www配下なら動作するかも。) => AxolConvertMeijinなら多分ちゃんと動く、ファイルがみつかった。
 #COPY apache2-laravel.conf /etc/apache2/sites-available/laravel.conf
 #RUN a2dissite 000-default.conf && a2ensite laravel.conf && a2enmod rewrite
 
